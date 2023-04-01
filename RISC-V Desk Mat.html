@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RISC-V Reference Sheet</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" rel="stylesheet">
+  <style>
+    .page {
+      background: #222;
+      color: #FFF;
+      height: 300mm;
+      width: 800mm;
+      font-family: "Titillium Web", sans-serif;
+      font-weight: normal;
+      font-size: 2.8mm;
+    }
+    .flex {
+      display: flex;
+    }
+    .flex.vertical {
+      flex-direction: column;
+    }
+    .flex.gap {
+      gap: 4mm;
+    }
+    table {
+      width: 100%;
+    }
+    table, th, td {
+      border: 0.5px solid #666;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 0.6mm 1mm;
+    }
+    @media print {
+      body {
+        margin: 0;
+      }
+      @page {
+        size: 80cm 30cm;
+        orientation: landscape;
+      }
+    }
+
+    .content {
+      margin: 0 8mm;
+    }
+    th {
+      height: 8mm;
+      font-weight: normal;
+      font-size: 4mm;
+    }
+
+    .header > img {
+      height: 18mm;
+    }
+    .header > span {
+      font-size: 7mm;
+      line-height: 18mm;
+      margin-left: 2mm
+    }
+  </style>
+</head>
+<body>
+  <!-- Original Image: https://www.kindpng.com/imgv/TomTJxJ_cute-angry-anime-girl-hd-png-download/ -->
+  <img src="assets/corner.png" style="position: absolute; top: 200mm; left: 700mm; height: 100mm">
+  <div class="page">
+    <div class="content vertical flex">
+      <div class="header flex">
+        <img src="assets/riscv-logo-1.png">
+        <span>
+          Reference Sheet
+        </span>
+      </div>
+      <div class="gap flex">
+        <div class="vertical gap flex">
+          <div class="gap flex">
+            <div>
+              <!-- Integer Register -->
+              <table>
+                <tr>
+                  <th colspan="4" style="background: #5c6bc0">General registers</th>
+                </tr>
+                <tr>
+                  <td>Register</td>
+                  <td>ABI Name</td>
+                  <td>Description</td>
+                  <td>Saver</td>
+                </tr>
+                <tr>
+                  <td>x0</td>
+                  <td>zero</td>
+                  <td>Constant zero</td>
+                  <td>--</td>
+                </tr>
+                <tr>
+                  <td>x1</td>
+                  <td>ra</td>
+                  <td>Return address</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>x2</td>
+                  <td>sp</td>
+                  <td>Stack pointer</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>x3</td>
+                  <td>gp</td>
+                  <td>Global pointer</td>
+                  <td>--</td>
+                </tr>
+                <tr>
+                  <td>x4</td>
+                  <td>tp</td>
+                  <td>Thread pointer</td>
+                  <td>--</td>
+                </tr>
+                <tr>
+                  <td>x5</td>
+                  <td>t0</td>
+                  <td>Temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>x6</td>
+                  <td>t1</td>
+                  <td>Temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>x7</td>
+                  <td>t2</td>
+                  <td>Temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>x8</td>
+                  <td>s0/fp</td>
+                  <td>Saved register / Frame pointer</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>x9</td>
+                  <td>s1</td>
+                  <td>Saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>x10</td>
+                  <td>a0</td>
+                  <td>Function argument / Return value</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>x11</td>
+                  <td>a1</td>
+                  <td>Function argument / Return value</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>x12</td>
+                  <td>a2</td>
+                  <td>Function argument</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>x13</td>
+                  <td>a3</td>
+                  <td>Function argument</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>x14</td>
+                  <td>a4</td>
+                  <td>Function argument</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>x15</td>
+                  <td>a5</td>
+                  <td>Function argument</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>x16</td>
+                  <td>a6</td>
+                  <td>Function argument</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>x17</td>
+                  <td>a7</td>
+                  <td>Function argument</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>x18</td>
+                  <td>s2</td>
+                  <td>Saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>x19</td>
+                  <td>s3</td>
+                  <td>Saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>x20</td>
+                  <td>s4</td>
+                  <td>Saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>x21</td>
+                  <td>s5</td>
+                  <td>Saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>x22</td>
+                  <td>s6</td>
+                  <td>Saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>x23</td>
+                  <td>s7</td>
+                  <td>Saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>x24</td>
+                  <td>s8</td>
+                  <td>Saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>x25</td>
+                  <td>s9</td>
+                  <td>Saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>x26</td>
+                  <td>s10</td>
+                  <td>Saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>x27</td>
+                  <td>s11</td>
+                  <td>Saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>x28</td>
+                  <td>t3</td>
+                  <td>Temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>x29</td>
+                  <td>t4</td>
+                  <td>Temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>x30</td>
+                  <td>t5</td>
+                  <td>Temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>x31</td>
+                  <td>t6</td>
+                  <td>Temporary</td>
+                  <td>Caller</td>
+                </tr>
+              </table>
+            </div>
+            <div>
+              <!-- FP Register -->
+              <table>
+                <tr>
+                  <th colspan="4" style="background: #ff7043">Floating Point Registers</th>
+                </tr>
+                <tr>
+                  <td>Register</td>
+                  <td>ABI Name</td>
+                  <td>Description</td>
+                  <td>Saver</td>
+                </tr>
+                <tr>
+                  <td>f0</td>
+                  <td>ft0</td>
+                  <td>FP temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f1</td>
+                  <td>ft1</td>
+                  <td>FP temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f2</td>
+                  <td>ft2</td>
+                  <td>FP temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f3</td>
+                  <td>ft3</td>
+                  <td>FP temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f4</td>
+                  <td>ft4</td>
+                  <td>FP temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f5</td>
+                  <td>ft5</td>
+                  <td>FP temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f6</td>
+                  <td>ft6</td>
+                  <td>FP temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f7</td>
+                  <td>ft7</td>
+                  <td>FP temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f8</td>
+                  <td>fs0</td>
+                  <td>FP saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>f9</td>
+                  <td>fs1</td>
+                  <td>FP saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>f10</td>
+                  <td>fa0</td>
+                  <td>FP argument / Return value</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f11</td>
+                  <td>fa1</td>
+                  <td>FP argument / Return value</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f12</td>
+                  <td>fa2</td>
+                  <td>FP argument</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f13</td>
+                  <td>fa3</td>
+                  <td>FP argument</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f14</td>
+                  <td>fa4</td>
+                  <td>FP argument</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f15</td>
+                  <td>fa5</td>
+                  <td>FP argument</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f16</td>
+                  <td>fa6</td>
+                  <td>FP argument</td>
+                <tr>
+                  <td>f17</td>
+                  <td>fa7</td>
+                  <td>FP argument</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f18</td>
+                  <td>fs2</td>
+                  <td>FP saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>f19</td>
+                  <td>fs3</td>
+                  <td>FP saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>f20</td>
+                  <td>fs4</td>
+                  <td>FP saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>f21</td>
+                  <td>fs5</td>
+                  <td>FP saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>f22</td>
+                  <td>fs6</td>
+                  <td>FP saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>f23</td>
+                  <td>fs7</td>
+                  <td>FP saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>f24</td>
+                  <td>fs8</td>
+                  <td>FP saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>f25</td>
+                  <td>fs9</td>
+                  <td>FP saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>f26</td>
+                  <td>fs10</td>
+                  <td>FP saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>f27</td>
+                  <td>fs11</td>
+                  <td>FP saved register</td>
+                  <td>Callee</td>
+                </tr>
+                <tr>
+                  <td>f28</td>
+                  <td>ft8</td>
+                  <td>FP temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f29</td>
+                  <td>ft9</td>
+                  <td>FP temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f30</td>
+                  <td>ft10</td>
+                  <td>FP temporary</td>
+                  <td>Caller</td>
+                </tr>
+                <tr>
+                  <td>f31</td>
+                  <td>ft11</td>
+                  <td>FP temporary</td>
+                  <td>Caller</td>
+                </tr>
+              </table>
+            </div>
+            <div>
+              <!-- Assembler Directives -->
+              <table>
+                <tr>
+                  <th colspan="4" style="background: #757575">Assembler Directives</th>
+                </tr>
+                <tr>
+                    <td>Directive</td>
+                    <td style="width: 40mm">Arguments</td>
+                    <td>Description</td>
+                </tr>
+                <tr>
+                    <td>.align</td>
+                    <td>integer</td>
+                    <td>align to power of 2 (alias for .p2align)</td>
+                </tr>
+                <tr>
+                    <td>.file</td>
+                    <td>&quot;filename&quot;</td>
+                    <td>emit filename FILE LOCAL symbol table</td>
+                </tr>
+                <tr>
+                    <td>.globl</td>
+                    <td>symbol_name</td>
+                    <td>emit symbol_name to symbol table (scope GLOBAL)</td>
+                </tr>
+                <tr>
+                    <td>.local</td>
+                    <td>symbol_name</td>
+                    <td>emit symbol_name to symbol table (scope LOCAL)</td>
+                </tr>
+                <tr>
+                    <td>.common</td>
+                    <td>symbol_name,size,align</td>
+                    <td>emit common object to .bss section</td>
+                </tr>
+                <tr>
+                    <td>.ident</td>
+                    <td>&quot;string&quot;</td>
+                    <td>accepted for source compatibility</td>
+                </tr>
+                <tr>
+                    <td>.section</td>
+                    <td>[{.text,.data,.rodata,.bss}]</td>
+                    <td>emit section (if not present, default .text) and make current</td>
+                </tr>
+                <tr>
+                    <td>.size</td>
+                    <td>symbol, symbol</td>
+                    <td>accepted for source compatibility</td>
+                </tr>
+                <tr>
+                    <td>.text</td>
+                    <td></td>
+                    <td>emit .text section (if not present) and make current</td>
+                </tr>
+                <tr>
+                    <td>.data</td>
+                    <td></td>
+                    <td>emit .data section (if not present) and make current</td>
+                </tr>
+                <tr>
+                    <td>.rodata</td>
+                    <td></td>
+                    <td>emit .rodata section (if not present) and make current</td>
+                </tr>
+                <tr>
+                    <td>.bss</td>
+                    <td></td>
+                    <td>emit .bss section (if not present) and make current</td>
+                </tr>
+                <tr>
+                    <td>.string</td>
+                    <td>&quot;string&quot;</td>
+                    <td>emit string</td>
+                </tr>
+                <tr>
+                    <td>.asciz</td>
+                    <td>&quot;string&quot;</td>
+                    <td>emit string (alias for .string)</td>
+                </tr>
+                <tr>
+                    <td>.equ</td>
+                    <td>name, value</td>
+                    <td>constant definition</td>
+                </tr>
+                <tr>
+                    <td>.macro</td>
+                    <td>name arg1 [, argn]</td>
+                    <td>begin macro definition \argname to substitute</td>
+                </tr>
+                <tr>
+                    <td>.endm</td>
+                    <td></td>
+                    <td>end macro definition</td>
+                </tr>
+                <tr>
+                    <td>.type</td>
+                    <td>symbol, @function</td>
+                    <td>accepted for source compatibility</td>
+                </tr>
+                <tr>
+                    <td>.option</td>
+                    <td>{arch, rvc, norvc, pic, nopic, relax, norelax, push, pop}</td>
+                    <td>RISC-V options</td>
+                </tr>
+                <tr>
+                    <td>.byte</td>
+                    <td>expression [, expression]*</td>
+                    <td>8-bit comma separated words</td>
+                </tr>
+                <tr>
+                    <td>.2byte</td>
+                    <td>expression [, expression]*</td>
+                    <td>16-bit comma separated words</td>
+                </tr>
+                <tr>
+                    <td>.4byte</td>
+                    <td>expression [, expression]*</td>
+                    <td>32-bit comma separated words</td>
+                </tr>
+                <tr>
+                    <td>.word</td>
+                    <td>expression [, expression]*</td>
+                    <td>32-bit comma separated words</td>
+                </tr>
+                <tr>
+                    <td>.8byte</td>
+                    <td>expression [, expression]*</td>
+                    <td>64-bit comma separated words</td>
+                </tr>
+                <tr>
+                    <td>.dword</td>
+                    <td>expression [, expression]*</td>
+                    <td>64-bit comma separated words</td>
+                </tr>
+                <tr>
+                    <td>.dtprelword</td>
+                    <td>expression [, expression]*</td>
+                    <td>32-bit thread local word</td>
+                </tr>
+                <tr>
+                    <td>.dtpreldword</td>
+                    <td>expression [, expression]*</td>
+                    <td>64-bit thread local word</td>
+                </tr>
+                <tr>
+                    <td>.sleb128</td>
+                    <td>expression</td>
+                    <td>signed little endian base 128, DWARF</td>
+                </tr>
+                <tr>
+                    <td>.uleb128</td>
+                    <td>expression</td>
+                    <td>unsigned little endian base 128, DWARF</td>
+                </tr>
+                <tr>
+                    <td>.p2align</td>
+                    <td>p2,[pad_val=0],max</td>
+                    <td>align to power of 2</td>
+                </tr>
+                <tr>
+                    <td>.balign</td>
+                    <td>b,[pad_val=0]</td>
+                    <td>byte align</td>
+                </tr>
+                <tr>
+                    <td>.zero</td>
+                    <td>integer</td>
+                    <td>zero bytes</td>
+                </tr>
+                <tr>
+                    <td>.variant_cc</td>
+                    <td>symbol_name</td>
+                    <td>annotate the symbol with variant calling convention</td>
+                </tr>
+                <tr>
+                    <td>.attribute</td>
+                    <td>name, value</td>
+                    <td>RISC-V object attributes</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="gap flex">
+            <!-- CSR Registers -->
+            <table>
+              <tr>
+                <th colspan="8" style="background: #7e57c2">CSR Registers (Partial List)</th>
+              </tr>
+              <tr>
+                <td>Number</td>
+                <td>Privilege</td>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Number</td>
+                <td>Privilege</td>
+                <td>Name</td>
+                <td>Description</td>
+              </tr>
+              <tr>
+                <td>0x001</td>
+                <td>URW</td>
+                <td>fflags</td>
+                <td>Floating-Point Accrued Exceptions</td>
+                <td>0x300</td>
+                <td>MRW</td>
+                <td>mstatus</td>
+                <td>Machine status register</td>
+              </tr>
+              <tr>
+                <td>0x002</td>
+                <td>URW</td>
+                <td>frm</td>
+                <td>Floating-Point Dynamic Rounding Mode</td>
+                <td>0x301</td>
+                <td>MRW</td>
+                <td>misa</td>
+                <td>ISA and extensions</td>
+              </tr>
+              <tr>
+                <td>0x003</td>
+                <td>URW</td>
+                <td>fcsr</td>
+                <td>Floating-Point Control and Status Register</td>
+                <td>0x302</td>
+                <td>MRW</td>
+                <td>medeleg</td>
+                <td>Machine exception delegation register</td>
+              </tr>
+              <tr>
+                <td>0xC00</td>
+                <td>URO</td>
+                <td>cycle</td>
+                <td>Cycle counter for RDCYCLE instruction</td>
+                <td>0x302</td>
+                <td>MRW</td>
+                <td>mideleg</td>
+                <td>Machine interrupt delegation register</td>
+              </tr>
+              <tr>
+                <td>0xC01</td>
+                <td>URO</td>
+                <td>time</td>
+                <td>Timer for RDTIME instruction</td>
+                <td>0x304</td>
+                <td>MRW</td>
+                <td>mie</td>
+                <td>Machine interrupt-enable register</td>
+              </tr>
+              <tr>
+                <td>0xC02</td>
+                <td>URO</td>
+                <td>instret</td>
+                <td>Instructions-retired counter for RDINSTRET instruction</td>
+                <td>0x305</td>
+                <td>MRW</td>
+                <td>mtvec</td>
+                <td>Machine trap-handler base address</td>
+              </tr>
+              <tr>
+                <td>0xC80</td>
+                <td>URO</td>
+                <td>cycleh</td>
+                <td>Upper 32 bits of cycle, RV32 only</td>
+                <td>0x306</td>
+                <td>MRW</td>
+                <td>mcounteren</td>
+                <td>Machine counter enable</td>
+              </tr>
+              <tr>
+                <td>0xC81</td>
+                <td>URO</td>
+                <td>timeh</td>
+                <td>Upper 32 bits of time, RV32 only</td>
+                <td>0x341</td>
+                <td>MRW</td>
+                <td>mepc</td>
+                <td>Machine exception program counter</td>
+              </tr>
+              <tr>
+                <td>0xC82</td>
+                <td>URO</td>
+                <td>instreth</td>
+                <td>Upper 32 bits of instret, RV32 only</td>
+                <td>0x342</td>
+                <td>MRW</td>
+                <td>mcause</td>
+                <td>Machine trap cause</td>
+              </tr>
+              <tr>
+                <td>0xF11</td>
+                <td>MRO</td>
+                <td>mvendorid</td>
+                <td>Vendor ID</td>
+                <td>0x343</td>
+                <td>MRW</td>
+                <td>mtval</td>
+                <td>Machine bad address or instruction</td>
+              </tr>
+              <tr>
+                <td>0xF12</td>
+                <td>MRO</td>
+                <td>marchid</td>
+                <td>Architecture ID</td>
+                <td>0x344</td>
+                <td>MRW</td>
+                <td>mip</td>
+                <td>Machine interrupt pending</td>
+              </tr>
+              <tr>
+                <td>0xF13</td>
+                <td>MRO</td>
+                <td>mimpid</td>
+                <td>Implementation ID</td>
+                <td>0xB00</td>
+                <td>MRW</td>
+                <td>mcycle</td>
+                <td>Machine cycle counter</td>
+              </tr>
+              <tr>
+                <td>0xF14</td>
+                <td>MRO</td>
+                <td>mhartid</td>
+                <td>Hardware thread ID</td>
+                <td>0xB02</td>
+                <td>MRW</td>
+                <td>minstret</td>
+                <td>Machine instructions-retired counter</td>
+              </tr>
+              <tr>
+                <td>0xF15</td>
+                <td>MRO</td>
+                <td>mconfigptr</td>
+                <td>Pointer to configuration data structure</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="gap vertical flex">
+          <!-- RV32I Integer Instruction -->
+          <table>
+            <tr>
+              <th colspan="10" style="background: #5c6bc0">RV32I Base Integer Instruction</th>
+            </tr>
+            <tr>
+              <td>Inst.</td>
+              <td>Name</td>
+              <td>Type</td>
+              <td>Definition</td>
+              <td colspan="6">Fields</td>
+            </tr>
+            <tr>
+              <td>lui</td>
+              <td>Load Upper Immediate</td>
+              <td>U</td>
+              <td>R[rd] = {32'bimm[31], imm, 12'b0}</td>
+              <td colspan="4">imm[31:12]</td>
+              <td>rd</td>
+              <td>0110111</td>
+            </tr>
+            <tr>
+              <td>auipc</td>
+              <td>Add Upper Immediate to PC</td>
+              <td>U</td>
+              <td>R[rd] = PC + {imm, 12'b0}</td>
+              <td colspan="4">imm[31:12]</td>
+              <td>rd</td>
+              <td>0010111</td>
+            </tr>
+            <tr>
+              <td>jal</td>
+              <td>Jump And Link</td>
+              <td>J</td>
+              <td>R[rd] = PC + 4; PC = PC + {imm, 1'b0}</td>
+              <td colspan="4">imm[20|10:1|11|19:12]</td>
+              <td>rd</td>
+              <td>1101111</td>
+            </tr>
+            <tr>
+              <td>jalr</td>
+              <td>Jump And Link Register</td>
+              <td>I</td>
+              <td>R[rd] = PC + 4; PC = PC + R[rs1] + imm</td>
+              <td colspan="2">imm[11:0]</td>
+              <td>rs1</td>
+              <td>000</td>
+              <td>rd</td>
+              <td>1100111</td>
+            </tr>
+            <tr>
+              <td>beq</td>
+              <td>Branch EQual</td>
+              <td>B</td>
+              <td>if (R[rs1] == R[rs2]) PC = PC + {imm, 1'b0}</td>
+              <td>imm[12|10:5]</td>
+              <td style="width: 8mm">rs2</td>
+              <td style="width: 8mm">rs1</td>
+              <td>000</td>
+              <td>imm[4:1|11]</td>
+              <td>1100011</td>
+            </tr>
+            
+            <tr>
+              <td>bne</td>
+              <td>Branch Not Equal</td>
+              <td>B</td>
+              <td>if (R[rs1] != R[rs2]) PC = PC + {imm, 1'b0}</td>
+              <td>imm[12|10:5]</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>001</td>
+              <td>imm[4:1|11]</td>
+              <td>1100011</td>
+            </tr>
+            <tr>
+              <td>blt</td>
+              <td>Branch Less Than</td>
+              <td>B</td>
+              <td>if (R[rs1] &lt; R[rs2]) PC = PC + {imm, 1'b0}</td>
+              <td>imm[12|10:5]</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>100</td>
+              <td>imm[4:1|11]</td>
+              <td>1100011</td>
+            </tr>
+            <tr>
+              <td>bge</td>
+              <td>Branch Greater than or Equal</td>
+              <td>B</td>
+              <td>if (R[rs1] &gt;= R[rs2]) PC = PC + {imm, 1'b0}</td>
+              <td>imm[12|10:5]</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>101</td>
+              <td>imm[4:1|11]</td>
+              <td>1100011</td>
+            </tr>
+            <tr>
+              <td>bltu</td>
+              <td>Branch Less Than Unsigned</td>
+              <td>B</td>
+              <td>if (R[rs1] &lt; R[rs2]) PC = PC + {imm, 1'b0}</td>
+              <td>imm[12|10:5]</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>110</td>
+              <td>imm[4:1|11]</td>
+              <td>1100011</td>
+            </tr>
+            <tr>
+              <td>bgeu</td>
+              <td>Branch Greater than or Equal Unsigned</td>
+              <td>B</td>
+              <td>if (R[rs1] &gt;= R[rs2]) PC = PC + {imm, 1'b0}</td>
+              <td>imm[12|10:5]</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>111</td>
+              <td>imm[4:1|11]</td>
+              <td>1100011</td>
+            </tr>
+            <tr>
+              <td>lb</td>
+              <td>Load Byte</td>
+              <td>I</td>
+              <td>R[rd] = {24'bM[][7], M[R[rs1]+imm][7:0]}</td>
+              <td colspan="2">imm[11:0]</td>
+              <td>rs1</td>
+              <td>000</td>
+              <td>rd</td>
+              <td>0000011</td>
+            </tr>
+            <tr>
+              <td>lh</td>
+              <td>Load Halfword</td>
+              <td>I</td>
+              <td>R[rd] = {16'bM[][7], M[R[rs1]+imm][15:0]}</td>
+              <td colspan="2">imm[11:0]</td>
+              <td>rs1</td>
+              <td>001</td>
+              <td>rd</td>
+              <td>0000011</td>
+            </tr>
+            <tr>
+              <td>lw</td>
+              <td>Load Word</td>
+              <td>I</td>
+              <td>R[rd] = M[R[rs1]+imm][31:0]</td>
+              <td colspan="2">imm[11:0]</td>
+              <td>rs1</td>
+              <td>010</td>
+              <td>rd</td>
+              <td>0000011</td>
+            </tr>
+            <tr>
+              <td>lbu</td>
+              <td>Load Byte Unsigned</td>
+              <td>I</td>
+              <td>R[rd] = {24'b0, M[R[rs1]+imm][7:0]}</td>
+              <td colspan="2">imm[11:0]</td>
+              <td>rs1</td>
+              <td>100</td>
+              <td>rd</td>
+              <td>0000011</td>
+            </tr>
+            <tr>
+              <td>lhu</td>
+              <td>Load Halfword Unsigned</td>
+              <td>I</td>
+              <td>R[rd] = {16'b0, M[R[rs1]+imm][15:0]}</td>
+              <td colspan="2">imm[11:0]</td>
+              <td>rs1</td>
+              <td>101</td>
+              <td>rd</td>
+              <td>0000011</td>
+            </tr>
+            <tr>
+              <td>sb</td>
+              <td>Store Byte</td>
+              <td>S</td>
+              <td>M[R[rs1]+imm][7:0] = R[rs2][7:0]</td>
+              <td>imm[11:5]</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>000</td>
+              <td>imm[4:0]</td>
+              <td>0100011</td>
+            </tr>
+            <tr>
+              <td>sh</td>
+              <td>Store Halfword</td>
+              <td>S</td>
+              <td>M[R[rs1]+imm][15:0] = R[rs2][15:0]</td>
+              <td>imm[11:5]</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>001</td>
+              <td>imm[4:0]</td>
+              <td>0100011</td>
+            </tr>
+            <tr>
+              <td>sw</td>
+              <td>Store Word</td>
+              <td>S</td>
+              <td>M[R[rs1]+imm][31:0] = R[rs2][31:0]</td>
+              <td>imm[11:5]</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>010</td>
+              <td>imm[4:0]</td>
+              <td>0100011</td>
+            </tr>
+            <tr>
+              <td>addi</td>
+              <td>ADD Immediate</td>
+              <td>I</td>
+              <td>R[rd] = R[rs1] + imm</td>
+              <td colspan="2">imm[11:0]</td>
+              <td>rs1</td>
+              <td>000</td>
+              <td>rd</td>
+              <td>0010011</td>
+            </tr>
+            <tr>
+              <td>slti</td>
+              <td>Set Less Than Immediate</td>
+              <td>I</td>
+              <td>R[rd] = (R[rs1] &lt; imm) ? 1 : 0</td>
+              <td colspan="2">imm[11:0]</td>
+              <td>rs1</td>
+              <td>010</td>
+              <td>rd</td>
+              <td>0010011</td>
+            </tr>
+            <tr>
+              <td>sltiu</td>
+              <td>Set Less Than Immediate Unsigned</td>
+              <td>I</td>
+              <td>R[rd] = (R[rs1] &lt; imm) ? 1 : 0</td>
+              <td colspan="2">imm[11:0]</td>
+              <td>rs1</td>
+              <td>011</td>
+              <td>rd</td>
+              <td>0010011</td>
+            </tr>
+            <tr>
+              <td>xori</td>
+              <td>XOR Immediate</td>
+              <td>I</td>
+              <td>R[rd] = R[rs1] ^ imm</td>
+              <td colspan="2">imm[11:0]</td>
+              <td>rs1</td>
+              <td>100</td>
+              <td>rd</td>
+              <td>0010011</td>
+            </tr>
+            <tr>
+              <td>ori</td>
+              <td>OR Immediate</td>
+              <td>I</td>
+              <td>R[rd] = R[rs1] | imm</td>
+              <td colspan="2">imm[11:0]</td>
+              <td>rs1</td>
+              <td>110</td>
+              <td>rd</td>
+              <td>0010011</td>
+            </tr>
+            <tr>
+              <td>andi</td>
+              <td>AND Immediate</td>
+              <td>I</td>
+              <td>R[rd] = R[rs1] & imm</td>
+              <td colspan="2">imm[11:0]</td>
+              <td>rs1</td>
+              <td>111</td>
+              <td>rd</td>
+              <td>0010011</td>
+            </tr>
+            <tr>
+              <td>slli</td>
+              <td>Shift Left Logical Immediate</td>
+              <td>I</td>
+              <td>R[rd] = R[rs1] &lt;&lt; imm</td>
+              <td>0000000</td>
+              <td>shamt</td>
+              <td>rs1</td>
+              <td>001</td>
+              <td>rd</td>
+              <td>0010011</td>
+            </tr>
+            <tr>
+              <td>srli</td>
+              <td>Shift Right Logical Immediate</td>
+              <td>I</td>
+              <td>R[rd] = R[rs1] &gt;&gt; imm</td>
+              <td>0000000</td>
+              <td>shamt</td>
+              <td>rs1</td>
+              <td>101</td>
+              <td>rd</td>
+              <td>0010011</td>
+            </tr>
+            <tr>
+              <td>srai</td>
+              <td>Shift Right Arithmetic Immediate</td>
+              <td>I</td>
+              <td>R[rd] = R[rs1] &gt;&gt;&gt; imm</td>
+              <td>0100000</td>
+              <td>shamt</td>
+              <td>rs1</td>
+              <td>101</td>
+              <td>rd</td>
+              <td>0010011</td>
+            </tr>
+            <tr>
+              <td>add</td>
+              <td>ADD</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] + R[rs2]</td>
+              <td>0000000</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>000</td>
+              <td>rd</td>
+              <td>0110011</td>
+            </tr>
+            <tr>
+              <td>sub</td>
+              <td>SUBtract</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] - R[rs2]</td>
+              <td>0100000</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>000</td>
+              <td>rd</td>
+              <td>0110011</td>
+            </tr>
+            <tr>
+              <td>sll</td>
+              <td>Shift Left Logical</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] &lt;&lt; R[rs2]</td>
+              <td>0000000</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>001</td>
+              <td>rd</td>
+              <td>0110011</td>
+            </tr>
+            <tr>
+              <td>slt</td>
+              <td>Set Less Than</td>
+              <td>R</td>
+              <td>R[rd] = (R[rs1] &lt; R[rs2]) ? 1 : 0</td>
+              <td>0000000</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>010</td>
+              <td>rd</td>
+              <td>0110011</td>
+            </tr>
+            <tr>
+              <td>sltu</td>
+              <td>Set Less Than Unsigned</td>
+              <td>R</td>
+              <td>R[rd] = (R[rs1] &lt; R[rs2]) ? 1 : 0</td>
+              <td>0000000</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>011</td>
+              <td>rd</td>
+              <td>0110011</td>
+            </tr>
+            <tr>
+              <td>xor</td>
+              <td>XOR</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] ^ R[rs2]</td>
+              <td>0000000</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>100</td>
+              <td>rd</td>
+              <td>0110011</td>
+            </tr>
+            <tr>
+              <td>srl</td>
+              <td>Shift Right Logical</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] &gt;&gt; R[rs2]</td>
+              <td>0000000</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>101</td>
+              <td>rd</td>
+              <td>0110011</td>
+            </tr>
+            <tr>
+              <td>sra</td>
+              <td>Shift Right Arithmetic</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] &gt;&gt;&gt; R[rs2]</td>
+              <td>0100000</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>101</td>
+              <td>rd</td>
+              <td>0110011</td>
+            </tr>
+            <tr>
+              <td>or</td>
+              <td>OR</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] | R[rs2]</td>
+              <td>0000000</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>110</td>
+              <td>rd</td>
+              <td>0110011</td>
+            </tr>
+            <tr>
+              <td>and</td>
+              <td>AND</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] & R[rs2]</td>
+              <td>0000000</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>111</td>
+              <td>rd</td>
+              <td>0110011</td>
+            </tr>
+            <tr>
+              <td>fence</td>
+              <td>Memory Ordering</td>
+              <td>I</td>
+              <td>Ensure correct ordering of memory operations</td>
+              <td colspan="2">fm, pred, succ</td>
+              <td>rs1</td>
+              <td>000</td>
+              <td>rd</td>
+              <td>0001111</td>
+            </tr>
+            
+            <tr>
+              <td>ecall</td>
+              <td>Environment CALL</td>
+              <td>I</td>
+              <td>Transfer control to operating system</td>
+              <td colspan="3">000000000000</td>
+              <td>000</td>
+              <td>00000</td>
+              <td>1110011</td>
+            </tr>
+            
+            <tr>
+              <td>ebreak</td>
+              <td>Environment BREAK</td>
+              <td>I</td>
+              <td>Transfer control to debugger</td>
+              <td colspan="3">000000000001</td>
+              <td>000</td>
+              <td>00000</td>
+              <td>1110011</td>
+            </tr>
+          </table>
+          <!-- zicsr Instruction -->
+          <table>
+            <tr>
+              <th colspan="10" style="background: #7e57c2">Control and Status Register Instruction Extension (Zicsr)</th>
+            </tr>
+            <tr>
+              <td>Inst.</td>
+              <td>Name</td>
+              <td>Type</td>
+              <td>Definition</td>
+              <td colspan="6">Fields</td>
+            </tr>
+            <tr>
+              <td>csrrw</td>
+              <td>CSR Read and Write</td>
+              <td>I</td>
+              <td>R[rd] = CSR; CSR = R[rs1]</td>
+              <td colspan="2" style="width: 20mm">csr</td>
+              <td style="width: 10mm">rs1</td>
+              <td>001</td>
+              <td style="width: 10mm">rd</td>
+              <td style="width: 10mm">1110011</td>
+            </tr>
+            <tr>
+              <td>csrrs</td>
+              <td>CSR Read and Set</td>
+              <td>I</td>
+              <td>R[rd] = CSR; CSR = CSR | R[rs1]</td>
+              <td colspan="2">csr</td>
+              <td>rs1</td>
+              <td>010</td>
+              <td>rd</td>
+              <td>1110011</td>
+            </tr>
+            <tr>
+              <td>csrrc</td>
+              <td>CSR Read and Clear</td>
+              <td>I</td>
+              <td>R[rd] = CSR; CSR = CSR & ~R[rs1]</td>
+              <td colspan="2">csr</td>
+              <td>rs1</td>
+              <td>011</td>
+              <td>rd</td>
+              <td>1110011</td>
+            </tr>
+            <tr>
+              <td>csrrwi</td>
+              <td>CSR Read and Write Immediate</td>
+              <td>I</td>
+              <td>R[rd] = CSR; CSR = {27'b0, imm}</td>
+              <td colspan="2">csr</td>
+              <td>uimm</td>
+              <td>001</td>
+              <td>rd</td>
+              <td>1110011</td>
+            </tr>
+            <tr>
+              <td>csrrsi</td>
+              <td>CSR Read and Set Immediate</td>
+              <td>I</td>
+              <td>R[rd] = CSR; CSR = CSR | {27'b0, imm}</td>
+              <td colspan="2">csr</td>
+              <td>uimm</td>
+              <td>010</td>
+              <td>rd</td>
+              <td>1110011</td>
+            </tr>
+            <tr>
+              <td>csrrci</td>
+              <td>CSR Read and Clear Immediate</td>
+              <td>I</td>
+              <td>R[rd] = CSR; CSR = CSR & ~{27'b0, imm}</td>
+              <td colspan="2">csr</td>
+              <td>uimm</td>
+              <td>011</td>
+              <td>rd</td>
+              <td>1110011</td>
+            </tr>
+          </table>
+        </div>
+        <div class="gap vertical flex">
+          <!-- RV64I Integer Instruction -->
+          <table>
+            <tr>
+              <th colspan="11" style="background: #78909c">RV64I Base Integer Instruction</th>
+            </tr>
+            <tr>
+              <td>Inst.</td>
+              <td>Name</td>
+              <td>Type</td>
+              <td>Definition</td>
+              <td colspan="7">Fields</td>
+            </tr>
+            <tr>
+              <td>lwu</td>
+              <td>Load Word Unsigned</td>
+              <td>I</td>
+              <td>R[rd] = M[R[rs1]+imm][31:0]</td>
+              <td colspan="3">imm[11:0]</td>
+              <td>rs1</td>
+              <td>110</td>
+              <td>rd</td>
+              <td>0000011</td>
+            </tr>
+            <tr>
+              <td>ld</td>
+              <td>Load Doubleword</td>
+              <td>I</td>
+              <td>R[rd] = M[R[rs1]+imm][63:0]</td>
+              <td colspan="3">imm[11:0]</td>
+              <td>rs1</td>
+              <td>011</td>
+              <td>rd</td>
+              <td>0000011</td>
+            </tr>
+            <tr>
+              <td>sd</td>
+              <td>Store Doubleword</td>
+              <td>S</td>
+              <td>M[R[rs1]+imm][63:0] = R[rs2][63:0]</td>
+              <td colspan="2">imm[11:5]</td>
+              <td style="width: 8mm">rs2</td>
+              <td style="width: 8mm">rs1</td>
+              <td>011</td>
+              <td>imm[4:0]</td>
+              <td>0100011</td>
+            </tr>
+            <tr>
+              <td>slli</td>
+              <td>Shift Left Logical Immediate</td>
+              <td>I</td>
+              <td>R[rd] = R[rs1] &lt;&lt; imm</td>
+              <td style="width: 10mm">000000</td>
+              <td colspan="2">shamt</td>
+              <td>rs1</td>
+              <td>001</td>
+              <td>rd</td>
+              <td>0010011</td>
+            </tr>
+            <tr>
+              <td>srli</td>
+              <td>Shift Right Logical Immediate</td>
+              <td>I</td>
+              <td>R[rd] = R[rs1] &gt;&gt; imm</td>
+              <td>000000</td>
+              <td colspan="2">shamt</td>
+              <td>rs1</td>
+              <td>101</td>
+              <td>rd</td>
+              <td>0010011</td>
+            </tr>
+            <tr>
+              <td>srai</td>
+              <td>Shift Right Arithmetic Immediate</td>
+              <td>I</td>
+              <td>R[rd] = R[rs1] &gt;&gt;&gt; imm</td>
+              <td>010000</td>
+              <td colspan="2">shamt</td>
+              <td>rs1</td>
+              <td>101</td>
+              <td>rd</td>
+              <td>0010011</td>
+            </tr>
+            <tr>
+              <td>addiw</td>
+              <td>ADD Immediate Word</td>
+              <td>I</td>
+              <td>R[rd] = R[rs1] + imm</td>
+              <td colspan="3">imm[11:0]</td>
+              <td>rs1</td>
+              <td>000</td>
+              <td>rd</td>
+              <td>0010011</td>
+            </tr>
+            <tr>
+              <td>slliw</td>
+              <td>Shift Left Logical Immediate Word</td>
+              <td>I</td>
+              <td>R[rd] = R[rs1] + imm</td>
+              <td colspan="2">0000000</td>
+              <td>shamt</td>
+              <td>rs1</td>
+              <td>001</td>
+              <td>rd</td>
+              <td>0010011</td>
+            </tr>
+            <tr>
+              <td>srli</td>
+              <td>Shift Right Logical Immediate Word</td>
+              <td>I</td>
+              <td>R[rd] = R[rs1] &gt;&gt; imm</td>
+              <td colspan="2">0000000</td>
+              <td>shamt</td>
+              <td>rs1</td>
+              <td>101</td>
+              <td>rd</td>
+              <td>0010011</td>
+            </tr>
+            <tr>
+              <td>srai</td>
+              <td>Shift Right Arithmetic Immediate Word</td>
+              <td>I</td>
+              <td>R[rd] = R[rs1] &gt;&gt;&gt; imm</td>
+              <td colspan="2">0100000</td>
+              <td>shamt</td>
+              <td>rs1</td>
+              <td>101</td>
+              <td>rd</td>
+              <td>0010011</td>
+            </tr>
+            <tr>
+              <td>addw</td>
+              <td>ADD Word</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] + R[rs2]</td>
+              <td colspan="2">0000000</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>000</td>
+              <td>rd</td>
+              <td>0111011</td>
+            </tr>
+            <tr>
+              <td>subw</td>
+              <td>SUBtract Word</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] - R[rs2]</td>
+              <td colspan="2">0100000</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>000</td>
+              <td>rd</td>
+              <td>0111011</td>
+            </tr>
+            <tr>
+              <td>sllw</td>
+              <td>Shift Left Logical Word</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] &lt;&lt; R[rs2]</td>
+              <td colspan="2">0000000</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>001</td>
+              <td>rd</td>
+              <td>0111011</td>
+            </tr>
+            <tr>
+              <td>srlw</td>
+              <td>Shift Right Logical Word</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] &gt;&gt; R[rs2]</td>
+              <td colspan="2">0000000</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>101</td>
+              <td>rd</td>
+              <td>0111011</td>
+            </tr>
+            <tr>
+              <td>sraw</td>
+              <td>Shift Right Arithmetic Word</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] &gt;&gt;&gt; R[rs2]</td>
+              <td colspan="2">0100000</td>
+              <td>rs2</td>
+              <td>rs1</td>
+              <td>101</td>
+              <td>rd</td>
+              <td>0111011</td>
+            </tr>
+          </table>
+          <!-- M Instruction -->
+          <table>
+            <tr>
+              <th colspan="10" style="background: #26a69a">Integer Multiplication and Division Extension (M)</th>
+            </tr>
+            <tr>
+              <td>Inst.</td>
+              <td>Name</td>
+              <td>Type</td>
+              <td>Definition</td>
+            </tr>
+            <tr>
+              <td>mul</td>
+              <td>MULtiply</td>
+              <td>R</td>
+              <td>R[rd] = (R[rs1] * R[rs2])[31:0]</td>
+            </tr>
+            <tr>
+              <td>mulh</td>
+              <td>MULtiply High</td>
+              <td>R</td>
+              <td>R[rd] = (R[rs1] * R[rs2])[63:32]</td>
+            </tr>
+            <tr>
+              <td>mulhsu</td>
+              <td>MULtiply upper Half Signed / Unsigned</td>
+              <td>R</td>
+              <td>R[rd] = (R[rs1] * R[rs2])[63:32]</td>
+            </tr>
+            <tr>
+              <td>mulhu</td>
+              <td>MULtiply High Unsigned</td>
+              <td>R</td>
+              <td>R[rd] = (R[rs1] * R[rs2])[63:32]</td>
+            </tr>
+            <tr>
+              <td>div</td>
+              <td>DIVide</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] / R[rs2]</td>
+            </tr>
+            <tr>
+              <td>divu</td>
+              <td>DIVide Unsigned</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] / R[rs2]</td>
+            </tr>
+            <tr>
+              <td>rem</td>
+              <td>REMainder</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] % R[rs2]</td>
+            </tr>
+            <tr>
+              <td>remu</td>
+              <td>REMainder Unsigned</td>
+              <td>R</td>
+              <td>R[rd] = R[rs1] % R[rs2]</td>
+            </tr>
+          </table>
+          <!-- A Instruction -->
+          <table>
+            <tr>
+              <th colspan="10" style="background: #9ccc65">Atomic Instruction Extension (A)</th>
+            </tr>
+            <tr>
+              <td>Inst.</td>
+              <td>Name</td>
+              <td>Type</td>
+              <td>Definition</td>
+            </tr>
+            <tr>
+              <td>lr.w</td>
+              <td>Load Reserved</td>
+              <td>R</td>
+              <td>R[rd] = M[R[rs1]], reservation on M[R[rs1]]</td>
+            </tr>
+            <tr>
+              <td>sc.w</td>
+              <td>Store Conditional</td>
+              <td>R</td>
+              <td>if reserved, M[R[rs1]] = R[rs2], R[rd] = 0; else R[rd] = 1</td>
+            </tr>
+            <tr>
+              <td>amoswap.w</td>
+              <td>Atomic Memory Operation SWAP</td>
+              <td>R</td>
+              <td>R[rd] = M[R[rs1]], M[R[rs1]] = R[rs2]</td>
+            </tr>
+            <tr>
+              <td>amoadd.w</td>
+              <td>Atomic Memory Operation ADD</td>
+              <td>R</td>
+              <td>R[rd] = M[R[rs1]], M[R[rs1]] = M[R[rs1]] + R[rs2]</td>
+            </tr>
+            <tr>
+              <td>amoxor.w</td>
+              <td>Atomic Memory Operation XOR</td>
+              <td>R</td>
+              <td>R[rd] = M[R[rs1]], M[R[rs1]] = M[R[rs1]] ^ R[rs2]</td>
+            </tr>
+            <tr>
+              <td>amoand.w</td>
+              <td>Atomic Memory Operation AND</td>
+              <td>R</td>
+              <td>R[rd] = M[R[rs1]], M[R[rs1]] = M[R[rs1]] & R[rs2]</td>
+            </tr>
+            <tr>
+              <td>amoxor.w</td>
+              <td>Atomic Memory Operation OR</td>
+              <td>R</td>
+              <td>R[rd] = M[R[rs1]], M[R[rs1]] = M[R[rs1]] | R[rs2]</td>
+            </tr>
+            <tr>
+              <td>amomin.w</td>
+              <td>Atomic Memory Operation MIN</td>
+              <td>R</td>
+              <td>R[rd] = M[R[rs1]], if(R[rs2] &lt; M[R[rs1]]) M[R[rs1]] = R[rs2]</td>
+            </tr>
+            <tr>
+              <td>amomax.w</td>
+              <td>Atomic Memory Operation MAX</td>
+              <td>R</td>
+              <td>R[rd] = M[R[rs1]], if(R[rs2] &gt; M[R[rs1]]) M[R[rs1]] = R[rs2]</td>
+            </tr>
+            <tr>
+              <td>amominu.w</td>
+              <td>Atomic Memory Operation MIN Unsigned</td>
+              <td>R</td>
+              <td>R[rd] = M[R[rs1]], if(R[rs2] &lt; M[R[rs1]]) M[R[rs1]] = R[rs2]</td>
+            </tr>
+            <tr>
+              <td>amomaxu.w</td>
+              <td>Atomic Memory Operation MAX Unsigned</td>
+              <td>R</td>
+              <td>R[rd] = M[R[rs1]], if(R[rs2] &gt; M[R[rs1]]) M[R[rs1]] = R[rs2]</td>
+            </tr>
+          </table>
+          <!-- zifenci Instruction -->
+          <table>
+            <tr>
+              <th colspan="10" style="background: #8d6e63">Instruction-Fetch Fence Extension (Zifencei)</th>
+            </tr>
+            <tr>
+              <td>Inst.</td>
+              <td>Name</td>
+              <td>Type</td>
+              <td>Definition</td>
+            </tr>
+            <tr>
+              <td>fence.i</td>
+              <td>Fence Instruction-fetch</td>
+              <td>I</td>
+              <td>Ensure correct ordering of instruction fetch</td>
+            </tr>
+          </table>
+        </div>
+        <div class="gap vertical flex">
+          <!-- F Instruction -->
+          <table>
+            <tr>
+              <th colspan="10" style="background: #ff7043">Single-Precision Floating Point Extension (F)</th>
+            </tr>
+            <tr>
+              <td>Inst.</td>
+              <td>Name</td>
+              <td>Type</td>
+              <td>Definition</td>
+            </tr>
+            <tr>
+              <td>flw</td>
+              <td>Load Word</td>
+              <td>I</td>
+              <td>F[rd] = M[R[rs1] + imm]</td>
+            </tr>
+            <tr>
+              <td>fsw</td>
+              <td>Store Word</td>
+              <td>S</td>
+              <td>M[R[rs1] + imm] = F[rd]</td>
+            </tr>
+            <tr>
+              <td>fmadd.s</td>
+              <td>Multiply-ADD</td>
+              <td>R</td>
+              <td>F[rd] = F[rs1] * F[rs2] + F[rs3]</td>
+            </tr>
+            <tr>
+              <td>fmsub.s</td>
+              <td>Multiply-SUBtract</td>
+              <td>R</td>
+              <td>F[rd] = F[rs1] * F[rs2] - F[rs3]</td>
+            </tr>
+            <tr>
+              <td>fnmsub.s</td>
+              <td>Negative Multiply-SUBtract</td>
+              <td>R</td>
+              <td>F[rd] = -(F[rs1] * F[rs2] - F[rs3])</td>
+            </tr>
+            <tr>
+              <td>fnmadd.s</td>
+              <td>Negative Multiply-ADD</td>
+              <td>R</td>
+              <td>F[rd] = -(F[rs1] * F[rs2] + F[rs3])</td>
+            </tr>
+            <tr>
+              <td>fadd.s</td>
+              <td>ADD</td>
+              <td>R</td>
+              <td>F[rd] = F[rs1] + F[rs2]</td>
+            </tr>
+            <tr>
+              <td>fsub.s</td>
+              <td>SUBtract</td>
+              <td>R</td>
+              <td>F[rd] = F[rs1] - F[rs2]</td>
+            </tr>
+            <tr>
+              <td>fmul.s</td>
+              <td>MULtiply</td>
+              <td>R</td>
+              <td>F[rd] = F[rs1] * F[rs2]</td>
+            </tr>
+            <tr>
+              <td>fdiv.s</td>
+              <td>DIVide</td>
+              <td>R</td>
+              <td>F[rd] = F[rs1] / F[rs2]</td>
+            </tr>
+            <tr>
+              <td>fsqrt.s</td>
+              <td>SQuare RooT</td>
+              <td>R</td>
+              <td>F[rd] = sqrt(F[rs1])</td>
+            </tr>
+            <tr>
+              <td>fsgnj.s</td>
+              <td>SiGN source</td>
+              <td>R</td>
+              <td>F[rd] = {F[rs2][31], F[rs1][30:0]}</td>
+            </tr>
+            <tr>
+              <td>fsgnjn.s</td>
+              <td>Negative SiGN source</td>
+              <td>R</td>
+              <td>F[rd] = {~F[rs2][31], F[rs1][30:0]}</td>
+            </tr>
+            <tr>
+              <td>fsgxjn.s</td>
+              <td>Xor SiGN source</td>
+              <td>R</td>
+              <td>F[rd] = {F[rs2][31] ^ F[rs1][31], F[rs1][30:0]}</td>
+            </tr>
+            <tr>
+              <td>fmin.s</td>
+              <td>MIN</td>
+              <td>R</td>
+              <td>F[rd] = (F[rs1] &lt; F[rs2]) ? F[rs1] : F[rs2]</td>
+            </tr>
+            <tr>
+              <td>fmax.s</td>
+              <td>MAX</td>
+              <td>R</td>
+              <td>F[rd] = (F[rs1] &gt; F[rs2]) ? F[rs1] : F[rs2]</td>
+            </tr>
+            <tr>
+              <td>fcvt.w.s</td>
+              <td>Convert to 32b Integer</td>
+              <td>R</td>
+              <td>R[rd] = integer(F[rs1])</td>
+            </tr>
+            <tr>
+              <td>fcvt.wu.s</td>
+              <td>Convert to 32b Integer Unsigned</td>
+              <td>R</td>
+              <td>R[rd] = integer(F[rs1])</td>
+            </tr>
+            <tr>
+              <td>fmv.x.w</td>
+              <td>Move to Integer</td>
+              <td>R</td>
+              <td>R[rd] = F[rs1]</td>
+            </tr>
+            <tr>
+              <td>feq.s</td>
+              <td>Compare Float EQual</td>
+              <td>R</td>
+              <td>R[rd] = (F[rs1] == F[rs2]) ? 1 : 0</td>
+            </tr>
+            <tr>
+              <td>flt.s</td>
+              <td>Compare Float Less Than</td>
+              <td>R</td>
+              <td>R[rd] = (F[rs1] &lt; F[rs2]) ? 1 : 0</td>
+            </tr>
+            <tr>
+              <td>fle.s</td>
+              <td>Compare Float Less than or Equal</td>
+              <td>R</td>
+              <td>R[rd] = (F[rs1] &lt;= F[rs2]) ? 1 : 0</td>
+            </tr>
+            <tr>
+              <td>fclass.s</td>
+              <td>Classify Type</td>
+              <td>R</td>
+              <td>R[rd] = class(F[rs1])</td>
+            </tr>
+            <tr>
+              <td>fcvt.s.w</td>
+              <td>Convert from 32b Integer</td>
+              <td>R</td>
+              <td>F[rd] = float(R[rs1])</td>
+            </tr>
+            <tr>
+              <td>fcvt.s.wu</td>
+              <td>Convert from 32b Integer Unsigned</td>
+              <td>R</td>
+              <td>F[rd] = float(R[rs1])</td>
+            </tr>
+            <tr>
+              <td>fmv.w.x</td>
+              <td>Move from Integer</td>
+              <td>R</td>
+              <td>F[rs1] = R[rd]</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
